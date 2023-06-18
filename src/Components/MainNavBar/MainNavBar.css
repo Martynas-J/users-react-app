@@ -1,0 +1,25 @@
+.navigation-link{
+  padding: 5px 10px;
+  text-decoration: none;
+  color: black;
+  border: 2px solid rgba(0, 0, 0, 0.589);
+  border-radius: 20px;
+  transition-property: color, box-shadow;
+  transition-duration: 0.5s;
+
+}
+.navigation-link.active{
+  color:blue;
+  box-shadow: inset 0px 0px 10px 10px rgba(0, 0, 0, 0.466);
+}
+.navigation-link:hover{
+  color:brown;
+  box-shadow: inset 0px 0px 10px 10px rgba(0, 0, 0, 0.466);
+}
+.nav-list{
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  padding: 20px;
+
+}

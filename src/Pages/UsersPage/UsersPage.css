@@ -1,0 +1,355 @@
+header{
+    position:sticky;
+    top: 0;
+    background-color: rgba(6, 92, 252, 0.548);
+}
+nav{
+    padding-right: 30px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    gap: 20px
+}
+nav ul{
+    margin: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display:flex;
+    justify-items: center;
+    gap: 10px 10px;
+}
+nav ul li a{
+    background-color: rgb(255, 255, 255);
+    border: 3px solid black;
+    color: black;
+    border-radius: 10px;
+    padding: 10px;
+    transition-property: background, color;
+    transition-duration: 1s;
+}
+nav form {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+nav form input, form select{
+    font-size: 20px;
+    height: 30px;
+    max-width: 150px;
+    border-radius: 5px;
+    border: 3px solid black;
+}
+nav ul li a:hover{
+    color: white;
+    background-color: black;
+}
+
+
+#posts-list{
+    padding-left: 20px;
+}
+#posts-list div{
+    margin-top: 20px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    border: 2px solid black;
+    align-items: center;
+    column-gap: 30px;
+}
+
+#posts-list h4{
+    border-bottom: 1px solid black;
+}
+#posts-list h4:hover{
+    font-style: italic;
+}
+#posts-list div:only-child{
+color: blue;
+}
+#posts-list h4 a{
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    font-family:'Courier New', Courier, monospace;
+}
+#posts-list h4 a:hover{
+    color: rgb(7, 119, 26);
+}
+#posts-list span a{
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#posts-list span a:hover{
+    color: rgb(43, 123, 228);
+}
+#users-list{
+    padding-left: 30px;
+}
+#users-list ul{
+    list-style: none;
+}
+#users-list ul li a{
+    color: black;
+    text-decoration: none;
+    font-family:monospace;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 30px;
+}
+#users-list ul li:hover{
+    list-style:circle;
+}
+#users-list ul li a:hover{
+    color: darkorange;
+    padding-left: 10px;
+}
+.body>h1{
+    text-align: center;
+}
+#post>div{
+    padding: 20px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 3fr 1fr ;
+}
+#post>div h2{
+    text-transform: uppercase;
+    border: 1px solid black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color:rgba(0, 102, 255, 0.192);
+    grid-column: span 3;
+    text-align: center;
+}
+#post>div h3{
+    background-color:rgba(179, 187, 199, 0.192);
+    border: 1px dotted black;
+    grid-column: span 3;
+    text-align: center;
+}
+#post a{
+    color: black;
+    transition-property: color;
+    transition-duration: 0.5s;
+}
+#post a:hover{
+    color: rgb(38, 10, 167);
+}
+#albums-list>div{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px;
+    gap: 20px;
+}
+#albums-list>div>div{
+    text-align: center;
+}
+#albums-list>div>div h3{
+    text-transform: uppercase;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+#albums-list>div>div div a{
+    color: black;
+    font-size: 18px;
+    transition-property: padding, color;
+    transition-duration: 2s;
+
+}
+#albums-list>div>div div a:hover{
+    color:blue;
+    padding-left: 50px;
+
+}
+#albums-list>div>div :nth-child(3){
+    color:grey;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#album>div{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+#album>div h3{
+    font-size: 30px;
+    text-transform: uppercase;
+}
+#album>div>div{
+    font-size: 20px;
+    padding-bottom: 30px;
+}
+#album>div>div a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+#album>div>div a:hover{
+    color: blue;
+    font-weight: 800;
+}
+
+
+#user-data {
+    padding: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content:center;
+}
+#user-data ul{
+    list-style: none;
+    border: 2px solid black;
+    margin: 0;
+    padding-left: 20px;
+
+}
+#user-data ul li:hover{
+    list-style:circle;
+}
+#user-data> *{
+    border: 2px solid black;
+    padding: 10px;
+    max-width: 400px;
+    box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.219);
+    transition: background-color 2s;
+}
+#user-data> *:hover{
+    background-color: rgb(145, 145, 145);
+    /* margin-top: -20px;
+    margin-bottom: 20px; */
+}
+#user-data h2{
+    text-align: center;
+}
+#user-data a{
+    color: black;
+    text-decoration: none;
+    transition-property: color;
+    transition-duration: 0.5s;
+}
+#user-data a:hover{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+#search{
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:30px;
+
+}
+
+#search div h1{
+    font-family: Arial, Helvetica, sans-serif;
+}
+#search div a{
+    color:black
+}
+#search div a:hover{
+    color:grey;
+    font-style: italic;
+}
+#home {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px;
+    gap: 20px;
+}
+#home>h1{
+    grid-column: span 3;
+    text-align: center;
+    color: white;
+    background-color: rgb(0, 0, 0);
+    padding: 10px;
+}
+
+.posts-wrap, .albums-wrap, .users-wrap{
+    border: 3px solid black;
+    box-shadow: 10px 10px 10px black, inset -1px -1px 40px 12px rgb(92, 92, 92);
+    padding: 10px;
+    transition-property: background, box-shadow;
+    transition-duration: 1s;
+}
+.posts-wrap:hover, .albums-wrap:hover, .users-wrap:hover{
+    background-color: rgb(192, 191, 191);
+    box-shadow: 10px 10px 10px rgb(102, 101, 101), inset -1px -1px 20px 12px rgb(255, 254, 254);
+}
+#home h2{
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: inset 7px -4px 14px 3px rgb(61, 61, 61);
+}
+.posts-wrap h1, .albums-wrap h1, .users-wrap h1{
+    text-align: center;
+}
+#home a{
+    color: black;
+}
+#home a:hover{
+    color: rgb(0, 108, 248);
+    font-style:oblique
+}
+#home .posts-content div, #home .albums-content div{
+    text-align:end;
+}
+#home .albums-content p a{
+    display: block;
+    text-align: center;
+}
+.pages-wrap{
+    display:flex;
+    flex-wrap: wrap;
+   padding: 20px;
+    font-size: 40px;
+    border-radius: 20px;
+    border-width: 1px;
+}
+a {
+     padding-left: 10px;
+     padding-right: 10px;
+     color: black;
+     text-decoration: none;
+}
+.page-link:hover{
+    font-weight: 800;
+    color: rgb(0, 170, 28);
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: inset -1px 0px 18px 0px black;
+}
+.page-first, .page-last, .page-back, .page-next{
+    font-weight: 500;
+}
+a.on-this-page{
+    font-weight: 500;
+    color: gray;
+    
+}
+a.on-this-page:hover{
+    background-color: unset;
+    box-shadow: unset;
+    color: gray;
+    font-weight: 500;
+}
+.pages-quantity{
+    font-size: 30px;
+    border: unset;
+    margin-left: 20px;
+}
+.pages-quantity:hover{
+    color: rgb(0, 170, 28);
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: inset -1px 0px 18px 0px black;
+}
+.search-item{
+    max-width: 400px;
+    border: 2px solid black; 
+    background-color: rgb(179, 179, 179); 
+    padding: 20px;
+}
