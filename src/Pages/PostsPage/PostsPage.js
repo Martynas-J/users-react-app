@@ -9,7 +9,7 @@ import '../../assets/index.css';
 
 
 const PostsPage = () => {
-  const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = useState("");
 
   const [posts, setPosts] = useState("")
   let id = useParams().id
@@ -23,9 +23,15 @@ const PostsPage = () => {
   }
 
   useEffect(() => {
-    axios.get(API_URL + `/posts${text}_embed=comments&_expand=user`)
+    let link = API_URL + `/posts${text}_embed=comments&_expand=user`
+    if (current) {
+      let start = Math.max((current - 1) * 10, 0)
+      let end = start + 10
+      link = API_URL + `/posts${text}_start=${start}&_end=${end}&_embed=comments&_expand=user`
+    }
+    axios.get(link)
       .then(res => setPosts(res.data))
-  }, [id])
+  }, [current])
 
   if (!posts) {
     return ""
