@@ -9,7 +9,7 @@ const SearchPage = () => {
 
   const text = useParams().text
   const category = useParams().category
-  console.log(useParams())
+
 
   const [data, setData] = useState("")
 

@@ -3,8 +3,13 @@ import { Fragment, useEffect, useState } from "react"
 import { API_URL } from "../../Components/Config/Config"
 import { Link, useParams } from "react-router-dom"
 import { firstLetterUpperCase } from "../../Components/Functions/Functions"
+import Pagination from "rc-pagination"
+import '../../assets/index.css';
+
+
 
 const PostsPage = () => {
+  const [current, setCurrent] = useState(1);
 
   const [posts, setPosts] = useState("")
   let id = useParams().id
@@ -36,11 +41,18 @@ const PostsPage = () => {
       </Fragment>
     )
   });
-
+  const pageSetHandler = (page) => {
+    setCurrent(page);
+  }
+  console.log(current)
   return (
-    <div id="posts-list">
-      <div className="posts">{allPosts}</div>
-    </div>
+    <>
+      <Pagination onChange={pageSetHandler} className="ant-pagination" defaultCurrent={1} total={100} />
+      <div id="posts-list">
+
+        <div className="posts">{allPosts}</div>
+      </div>
+    </>
   )
 }
 

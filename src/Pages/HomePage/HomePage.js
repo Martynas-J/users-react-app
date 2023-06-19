@@ -25,7 +25,6 @@ const HomePage = () => {
     if (!posts || !albums || !users) {
         return ""
     }
-    console.log(users)
     const postsList = posts.map(element => (
         <div key={element.id} className="posts-content">
             <h2><Link to={`./PostPage/${element.id}`}>Title: {firstLetterUpperCase(element.title)}</Link></h2>
