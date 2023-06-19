@@ -32,7 +32,7 @@ const AlbumsPage = () => {
         {albumPicture}
       </div>
     )
-  });
+  })
 
   return (
     <div id="albums-list">

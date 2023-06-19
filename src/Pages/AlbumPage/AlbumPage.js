@@ -1,8 +1,10 @@
 
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { API_URL } from "../../Components/Config/Config"
 import axios from "axios"
+import "react-image-gallery/styles/css/image-gallery.css"
+import ReactImageGallery from "react-image-gallery";
 
 
 const AlbumPage = () => {
@@ -16,18 +18,17 @@ const AlbumPage = () => {
   if (!album) {
     return ""
   }
+  let images = []
   const albumTitle = <h3>{album.title}</h3>
   const albumUser = <div><Link to={`../UsersPage/:${album.userId}`}>Author: {album.user.name}</Link></div>
-  const photos = album.photos.map(element => (
-    <Link key={element.id} to={element.url}><img src={element.thumbnailUrl} /></Link>
-  ))
+  album.photos.map(element => images.push({original: element.url, thumbnail: element.thumbnailUrl, description: element.title}))
 
   return (
     <div id="album">
       <div>
         {albumTitle}
         {albumUser}
-        <div>{photos}</div>
+        <ReactImageGallery thumbnailHeight="200px"  items={images} />
       </div>
     </div>
   )
