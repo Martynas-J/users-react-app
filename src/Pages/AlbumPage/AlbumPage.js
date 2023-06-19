@@ -28,7 +28,7 @@ const AlbumPage = () => {
       <div>
         {albumTitle}
         {albumUser}
-        <ReactImageGallery thumbnailHeight="200px"  items={images} />
+        <ReactImageGallery items={images} />
       </div>
     </div>
   )
