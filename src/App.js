@@ -23,7 +23,11 @@ function App() {
         <Route path='/PostPage/:id' element={<PostPage />} />
         <Route path='/AlbumsPage' element={<AlbumsPage />} />
         <Route path='/AlbumsPage/:id' element={<AlbumPage />} />
+        <Route path='/SearchPage/' element={<SearchPage />} />
+        <Route path='/SearchPage//:category' element={<SearchPage />} />
         <Route path='/SearchPage/:text' element={<SearchPage />} />
+        <Route path='/SearchPage/:category' element={<SearchPage />} />
+        <Route path='/SearchPage/:text/:category' element={<SearchPage />} />
         <Route path='*' element={
           <div>
             <h1>Page not found</h1>

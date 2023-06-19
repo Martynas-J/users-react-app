@@ -2,25 +2,31 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import "./MainNavBar.css"
 import { useState } from 'react';
 import { categoriesArr } from '../Config/Config';
+import { firstLetterUpperCase } from '../Functions/Functions';
 
 const MainNavBar = () => {
 
-    const [searchText, setSearchText] = useState('');
+    const [searchText, setSearchText] = useState("");
     const [category, setCategory] = useState("")
+
+    const resetFormHandler = () => {
+        setSearchText("")
+    }
+
     const searchAll =
-        <form >
+        <form>
             <input value={searchText}
                 onChange={(event) => setSearchText(event.target.value)} type='text' placeholder='Write text'></input>
-            <Link to={`/SearchPage/${searchText}`}><input type='submit' value="Search"></input> </Link>
+            <Link to={`/SearchPage/${searchText}`}><button onClick={resetFormHandler}>Search</button> </Link>
         </form>
     const searchByCategory =
         <form>
             <input value={searchText}
                 onChange={(e) => setSearchText(e.target.value)} type='text' placeholder='Write text'></input>
             <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                {categoriesArr.map((item, index) => <option key={index}>{item}</option>)}
+                {categoriesArr.map((item, index) => <option key={index} value={item}>{firstLetterUpperCase(item)}</option>)}
             </select>
-            <Link to={`/SearchPage/${searchText}`}><input type='submit' value="Search"></input> </Link>
+            <Link to={`/SearchPage/${searchText}/${category}`}><button onClick={resetFormHandler}>Search</button> </Link>
         </form>
 
     return (

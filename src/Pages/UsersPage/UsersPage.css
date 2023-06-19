@@ -1,3 +1,6 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
 header{
     position:sticky;
     top: 0;
@@ -32,7 +35,7 @@ nav form {
     justify-content:space-between;
     align-items: center;
 }
-nav form input, form select{
+nav form input, nav form button, form select{
     font-size: 20px;
     height: 30px;
     max-width: 150px;
