@@ -28,7 +28,7 @@ const HomePage = () => {
     console.log(users)
     const postsList = posts.map(element => (
         <div key={element.id} className="posts-content">
-            <h2><Link to={`./PostsPage/${element.id}`}>Title: {firstLetterUpperCase(element.title)}</Link></h2>
+            <h2><Link to={`./PostPage/${element.id}`}>Title: {firstLetterUpperCase(element.title)}</Link></h2>
             <div><Link to={`./UsersPage/${element.userId}`}>Author: {element.user.name}</Link></div>
             <p>{firstLetterUpperCase(element.body)}</p>
         </div>

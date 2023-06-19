@@ -33,7 +33,7 @@ const UserPage = () => {
     const userData = <ul>{name}{nick}{email}{address}{phone}{website}{company}</ul>
 
     if (user.posts.length > 0) {
-        posts = user.posts.map(element => <h4 key={element.id}><Link to={`../PostsPage/${element.id}`} >Title: {firstLetterUpperCase(element.title)}</Link></h4>
+        posts = user.posts.map(element => <h4 key={element.id}><Link to={`../PostPage/${element.id}`} >Title: {firstLetterUpperCase(element.title)}</Link></h4>
         );
     } else {
         posts = "Empty"

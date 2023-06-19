@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import "./MainNavBar.css"
 import { useState } from 'react';
 import { categoriesArr } from '../Config/Config';
@@ -8,19 +8,19 @@ const MainNavBar = () => {
     const [searchText, setSearchText] = useState('');
     const [category, setCategory] = useState("")
     const searchAll =
-        <form action={`../SearchPage/${searchText}`}>
+        <form >
             <input value={searchText}
                 onChange={(event) => setSearchText(event.target.value)} type='text' placeholder='Write text'></input>
-            <input type='submit' value="Search"></input>
+            <Link to={`/SearchPage/${searchText}`}><input type='submit' value="Search"></input> </Link>
         </form>
     const searchByCategory =
-        <form action={`../SearchPage/${searchText}`}>
+        <form>
             <input value={searchText}
                 onChange={(e) => setSearchText(e.target.value)} type='text' placeholder='Write text'></input>
             <select value={category} onChange={(e) => setCategory(e.target.value)}>
                 {categoriesArr.map((item, index) => <option key={index}>{item}</option>)}
             </select>
-            <input type='submit' value="Search"></input>
+            <Link to={`/SearchPage/${searchText}`}><input type='submit' value="Search"></input> </Link>
         </form>
 
     return (
