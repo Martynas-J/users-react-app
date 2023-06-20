@@ -14,8 +14,7 @@ const PostsPage = () => {
 
   const [posts, setPosts] = useState("")
   const [length, setLength] = useState("")
-  const [isDelete, setIsDelete] = useState(false)
-  const [isCreated, setIsCreated] = useState(false)
+  const [isChanged, setIsChanged] = useState(false)
   let id = useParams().id
 
   let text = ""
@@ -38,15 +37,14 @@ const PostsPage = () => {
     }
     axios.get(link)
       .then(res => setPosts(res.data))
-      setIsDelete(false)
-      setIsCreated(false)
-  }, [current, isDelete, isCreated])
+      setIsChanged(false)
+  }, [current, isChanged])
 
   if (!posts) {
     return ""
   }
   const deleteHandler = (id) => {
-    setIsDelete(true)
+    setIsChanged(true)
     axios.delete(`${API_URL}/posts/${id}`)
   }
   const allPosts = posts.map(element => {
@@ -64,7 +62,7 @@ const PostsPage = () => {
     setCurrent(page);
   }
   const postCreatedHandler = () => {
-    setIsCreated(true)
+    setIsChanged(true)
   }
 
   return (

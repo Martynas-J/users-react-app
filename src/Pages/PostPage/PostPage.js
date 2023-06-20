@@ -3,21 +3,19 @@ import { Link, useParams } from "react-router-dom"
 import { API_URL } from "../../Components/Config/Config"
 import axios from "axios"
 import { firstLetterUpperCase } from "../../Components/Functions/Functions"
-import CreateComment from "../../Components/CreateComment/CreateComment"
-
+import CreateComment from "../../Components/CreateEditComment/CreateEditComment"
 
 const PostPage = () => {
     const [post, setPost] = useState([])
+    const [comment, setComment] = useState("")
     const id = useParams().id
-    const [isDelete, setIsDelete] = useState(false)
-    const [isCreated, setIsCreated] = useState(false)
+    const [isChanged, setIsChanged] = useState(false)
 
     useEffect(() => {
         axios.get(`${API_URL}/posts/${id}/?_embed=comments&_expand=user`)
             .then(res => setPost(res.data))
-        setIsCreated(false)
-        setIsDelete(false)
-    }, [id, isCreated, isDelete])
+        setIsChanged(false)
+    }, [id, isChanged])
 
     if (post.length === 0) {
         return ""
@@ -33,17 +31,25 @@ const PostPage = () => {
         <Fragment key={element.id}>
             <h4>{firstLetterUpperCase(element.name)}</h4>
             <p>{firstLetterUpperCase(element.body)}</p>
-            <span>{`Email: ${element.email}`}<button onClick={() => deleteHandler(element.id)}>Delete</button></span>
-            
+            <span>
+                {`Email: ${element.email}`}
+                <button onClick={() => deleteHandler(element.id)}>Delete</button>
+                <button onClick={() => editHandler(element.id)}>Edit</button>
+                </span>
+
         </Fragment>
     ))
     const CommentCreatedHandler = () => {
-        setIsCreated(true)
+        setIsChanged(true)
     }
     const deleteHandler = (id) => {
-        setIsDelete(true)
         axios.delete(`${API_URL}/comments/${id}`)
-      }
+        setIsChanged(true)
+    }
+    const editHandler = (id) => {
+        const editComment = post.comments.find(((post) => post.id === id))
+        setComment(editComment)
+    }
     return (
         <div id="post">
             <div>
@@ -53,7 +59,7 @@ const PostPage = () => {
                 {allUserPosts}
                 {commentsTitle}
                 {allComments}
-                <CreateComment onCommentCreated={CommentCreatedHandler} />
+                <CreateComment comment ={comment}  onCommentCreated={CommentCreatedHandler} />
             </div>
         </div>
     )
