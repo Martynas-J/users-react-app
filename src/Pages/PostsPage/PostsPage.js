@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom"
 import { firstLetterUpperCase } from "../../Components/Functions/Functions"
 import Pagination from "rc-pagination"
 import '../../assets/index.css';
+import CreatePost from "../../Components/CreatePost/CreatePost"
 
 
 
@@ -13,6 +14,8 @@ const PostsPage = () => {
 
   const [posts, setPosts] = useState("")
   const [length, setLength] = useState("")
+  const [isDelete, setIsDelete] = useState(false)
+  const [isCreated, setIsCreated] = useState(false)
   let id = useParams().id
 
   let text = ""
@@ -35,19 +38,24 @@ const PostsPage = () => {
     }
     axios.get(link)
       .then(res => setPosts(res.data))
-  }, [current])
+      setIsDelete(false)
+      setIsCreated(false)
+  }, [current, isDelete, isCreated])
 
   if (!posts) {
     return ""
   }
-  console.log(length)
+  const deleteHandler = (id) => {
+    setIsDelete(true)
+    axios.delete(`${API_URL}/posts/${id}`)
+  }
   const allPosts = posts.map(element => {
     const postTitle = <Link to={`../PostPage/${element.id}`}>Title: {firstLetterUpperCase(element.title)}</Link>
     const postUser = <Link to={`../UsersPage/${element.userId}`}>Author: {element.user.name}</Link>
     const postComments = <span>({element.comments.length} Comments)</span>
     return (
       <Fragment key={element.id}>
-        <h4>{postTitle}{postComments}</h4>
+        <h4>{postTitle}{postComments}<button onClick={() => deleteHandler(element.id)}>Delete</button></h4>
         <span>{postUser}</span>
       </Fragment>
     )
@@ -55,12 +63,18 @@ const PostsPage = () => {
   const pageSetHandler = (page) => {
     setCurrent(page);
   }
+  const postCreatedHandler = () => {
+    setIsCreated(true)
+  }
+
   return (
     <>
-      <Pagination  onChange={pageSetHandler} className="ant-pagination" defaultCurrent={1} total={length} />
+      <Pagination onChange={pageSetHandler} className="ant-pagination" defaultCurrent={1} total={length} />
       <div id="posts-list">
-
-        <div className="posts">{allPosts}</div>
+        <div className="posts">
+          {allPosts}
+        </div>
+        <CreatePost onPostCreated = {postCreatedHandler} />
       </div>
     </>
   )

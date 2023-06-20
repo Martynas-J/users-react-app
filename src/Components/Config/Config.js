@@ -1,2 +1,2 @@
-export const API_URL = "https://jsonplaceholder.typicode.com"
+export const API_URL = " http://localhost:3000"
 export const categoriesArr = ["posts", "users", "comments", "albums", "photos"]

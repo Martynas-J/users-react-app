@@ -23,7 +23,6 @@ const UsersPage = () => {
   return (
     <div id="users-list">
       <ul>{usersList}</ul>
-
     </div>
   )
 }
