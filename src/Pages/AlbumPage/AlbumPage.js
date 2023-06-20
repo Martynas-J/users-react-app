@@ -20,7 +20,7 @@ const AlbumPage = () => {
   }
   let images = []
   const albumTitle = <h3>{album.title}</h3>
-  const albumUser = <div><Link to={`../UsersPage/:${album.userId}`}>Author: {album.user.name}</Link></div>
+  const albumUser = <div><Link to={`../UsersPage/${album.userId}`}>Author: {album.user.name}</Link></div>
   album.photos.map(element => images.push({original: element.url, thumbnail: element.thumbnailUrl, description: element.title}))
 
   return (
