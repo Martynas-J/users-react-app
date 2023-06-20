@@ -47,7 +47,7 @@ const PostPage = () => {
         setIsChanged(true)
     }
     const editHandler = (id) => {
-        const editComment = post.comments.find(((post) => post.id === id))
+        const editComment = post.comments.find(((comment) => comment.id === id))
         setComment(editComment)
     }
     return (

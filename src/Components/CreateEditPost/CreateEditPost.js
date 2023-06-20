@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../Config/Config";
 
-const CreatePost = ({onPostCreated}) => {
+const CreateEditPost = ({onPostCreated, postToEdit}) => {
   const [users, setUsers] = useState([]);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [user, setUser] = useState('');
+  const [buttonText, setButtonText] = useState("Create new comment");
 
   useEffect(() => {
     axios.get(`${API_URL}/users`)
@@ -15,8 +16,17 @@ const CreatePost = ({onPostCreated}) => {
         setUser(res.data[0].id);
         setUsers(res.data);
       });
-  }, [title, body]);
+  }, []);
 
+  useEffect(() => {
+    if (postToEdit) {
+      setButtonText("Save")
+      const { title, body, userId } = postToEdit
+      setTitle(title)
+      setBody(body)
+      setUser(userId)
+    }
+  }, [postToEdit]);
   const titleHandler = event => setTitle(event.target.value);
   const bodyHandler = event => setBody(event.target.value);
   const userHandler = event => setUser(event.target.value);
@@ -24,11 +34,17 @@ const CreatePost = ({onPostCreated}) => {
   const newPostHandler = (event) => {
     event.preventDefault();
     const newPost = {
-      title: title,
-      body: body,
+      title,
+      body,
       userId: Number(user)
     };
-    axios.post(`${API_URL}/posts`, newPost)
+    if (postToEdit) {
+      setButtonText("Create new comment")
+      console.log(postToEdit)
+      axios.patch(`${API_URL}/posts/${postToEdit.id}`, newPost)
+    }else {
+      axios.post(`${API_URL}/posts`, newPost)
+    }
     onPostCreated(true)
     setTitle("")
     setBody("")
@@ -53,9 +69,9 @@ const CreatePost = ({onPostCreated}) => {
         </select>
       </div>
 
-      <input type="submit" value="Create new post" />
+      <input type="submit" value={buttonText} />
     </form>
   )
 }
 
-export default CreatePost;
+export default CreateEditPost;

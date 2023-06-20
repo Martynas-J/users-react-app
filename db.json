@@ -590,9 +590,9 @@
     },
     {
       "title": "qwe",
-      "body": "wqe",
-      "userId": 1,
-      "id": 103
+      "body": "f",
+      "userId": 8,
+      "id": 102
     }
   ],
   "users": [
@@ -4194,41 +4194,6 @@
       "email": "sfef@dfsfs",
       "postId": 101,
       "id": 496
-    },
-    {
-      "name": "sdfas",
-      "body": "sdf",
-      "email": "sdf@fds",
-      "postId": 103,
-      "id": 498
-    },
-    {
-      "name": "qwe",
-      "body": "qweqwe",
-      "email": "dawd@sdfdf",
-      "postId": 103,
-      "id": 499
-    },
-    {
-      "name": "wef",
-      "body": "ewf",
-      "email": "wefwef@fdsf",
-      "postId": 103,
-      "id": 500
-    },
-    {
-      "name": "Petras",
-      "body": "dfgdfg",
-      "email": "dfg@gsdfg",
-      "postId": 103,
-      "id": 501
-    },
-    {
-      "name": "Jonas",
-      "body": "dfgdfg",
-      "email": "dfg@gsdfg",
-      "postId": 103,
-      "id": 502
     }
   ],
   "albums": [
