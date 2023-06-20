@@ -3,7 +3,6 @@ import "./MainNavBar.css"
 import { SearchAllForm } from '../Forms/SearchAllForm';
 import SearchByCategoryForm from '../Forms/SearchByCategoryForm';
 
-
 const MainNavBar = () => {
 
     return (
@@ -26,7 +25,6 @@ const MainNavBar = () => {
                 {!useLocation().pathname.includes("SearchPage") ?
                     <SearchAllForm /> : <SearchByCategoryForm />}
             </nav>
-
         </>
     )
 }
