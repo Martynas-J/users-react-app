@@ -51,7 +51,6 @@ const UserForm = () => {
     useEffect(() => {
         if (user) {
             setButtonText("Save")
-            console.log(user)
             const { name, username, email, address, phone, website, company } = user
             const { street, suite, city, zipcode, geo } = address
             const { lat, lng } = geo

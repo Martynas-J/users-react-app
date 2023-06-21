@@ -833,52 +833,6 @@
       }
     },
     {
-      "name": "hrtf",
-      "username": "rth",
-      "email": "trhtrh@dg",
-      "address": {
-        "street": "dftkjdfj",
-        "suite": "dfjyf",
-        "city": "jfyj",
-        "zipcode": "25252",
-        "geo": {
-          "lat": "52525",
-          "lng": "32424"
-        }
-      },
-      "phone": "5285",
-      "website": "trh",
-      "company": {
-        "name": "rthrth",
-        "catchPhrase": "rtht",
-        "bs": "hdt"
-      },
-      "id": 11
-    },
-    {
-      "name": "ger",
-      "username": "erg",
-      "email": "erg@rgfd",
-      "address": {
-        "street": "djt",
-        "suite": "strjh",
-        "city": "sdgsd82",
-        "zipcode": "82858",
-        "geo": {
-          "lat": "288",
-          "lng": "5858"
-        }
-      },
-      "phone": "8822",
-      "website": "drg",
-      "company": {
-        "name": "fth",
-        "catchPhrase": "fth",
-        "bs": "fthfth"
-      },
-      "id": 12
-    },
-    {
       "name": "naujas vartotojas",
       "username": "fgdh",
       "email": "dgdfh@asdfs",
@@ -4274,8 +4228,8 @@
   "albums": [
     {
       "userId": 1,
-      "id": 2,
-      "title": "sunt qui excepturi placeat culpa"
+      "title": "sunts qui excepturi placeat culpa",
+      "id": 2
     },
     {
       "userId": 1,

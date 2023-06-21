@@ -50,9 +50,4 @@ const AddPhoto = ({ onAddPhoto }) => {
         </div>
     )
 }
-// "albumId": 2,
-// "id": 79,
-// "title": "est vel et laboriosam quo aspernatur distinctio molestiae",
-// "url": "https://via.placeholder.com/600/c611a9",
-// "thumbnailUrl": "https://via.placeholder.com/150/c611a9"
 export default AddPhoto

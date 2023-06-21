@@ -42,7 +42,7 @@ const UserPage = () => {
         albums = user.albums.map(element => <h4 key={element.id}><Link to={`../AlbumsPage/${element.id}`}>Title: {firstLetterUpperCase(element.title)}</Link></h4>
         );
     } else {
-        posts = "Empty"
+        albums = "Empty"
     }
     return (
         <>
