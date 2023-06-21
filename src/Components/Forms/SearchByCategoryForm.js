@@ -15,7 +15,7 @@ const SearchByCategoryForm = () => {
     <form>
     <input value={searchText}
         onChange={(e) => setSearchText(e.target.value)} type='text' placeholder='Write text'></input>
-    <select value={category} onChange={(e) => setCategory(e.target.value)}>
+    <select className="category-select" value={category} onChange={(e) => setCategory(e.target.value)}>
         {categoriesArr.map((item, index) => <option key={index} value={item}>{firstLetterUpperCase(item)}</option>)}
     </select>
     <Link to={`/SearchPage/${searchText}/${category}`}><button onClick={resetFormHandler}>Search</button> </Link>

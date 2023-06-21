@@ -35,7 +35,7 @@ nav form {
     justify-content:space-between;
     align-items: center;
 }
-nav form input, nav form button, form select{
+nav form input, nav form button, .category-select{
     font-size: 20px;
     height: 30px;
     max-width: 150px;
@@ -51,7 +51,7 @@ nav ul li a:hover{
 #posts-list{
     padding-left: 20px;
 }
-#posts-list div{
+#posts-list>div{
     margin-top: 20px;
     padding: 10px;
     display: grid;
@@ -355,4 +355,27 @@ a.on-this-page:hover{
     border: 2px solid black; 
     background-color: rgb(179, 179, 179); 
     padding: 20px;
+}
+.comment-form, .post-form, .user-form, .album-form{
+    box-shadow: 7px 7px 20px 1px rgba(0, 0, 0, 0.678);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    width: 350px;
+    margin-left: 200px;
+}
+.form-control{
+    display: flex;
+    justify-content: space-between;
+}
+.user-form-link:hover, .album-form-link:hover{
+    color: blue;
+}
+.user-address, .user-geo, .user-company{
+    text-align: center;
+    padding-left: 10px;
+}
+.user-data-form, .album-data-form{
+    text-align: center;
 }

@@ -51,7 +51,7 @@ const CreateEditPost = ({onPostCreated, postToEdit}) => {
   }
 
   return (
-    <form onSubmit={newPostHandler}>
+    <form className="post-form" onSubmit={newPostHandler}>
       <div className="form-control">
         <label htmlFor="title">Title:</label>
         <input type="text" id="title" name="title" value={title} onChange={titleHandler} />
@@ -59,12 +59,12 @@ const CreateEditPost = ({onPostCreated, postToEdit}) => {
 
       <div className="form-control">
         <label htmlFor="body">Body:</label>
-        <textarea id="body" name="body" rows="5" cols="30" value={body} onChange={bodyHandler}></textarea>
+        <textarea id="body" name="body" rows="5" cols="21" value={body} onChange={bodyHandler}></textarea>
       </div>
 
       <div className="form-control">
         <label htmlFor="user">User:</label>
-        <select id="user" name="user" value={user} onChange={userHandler}>
+        <select className="user-select" id="user" name="user" value={user} onChange={userHandler}>
           {users.map(user => <option key={user.id} value={user.id}>{user.name}</option>)}
         </select>
       </div>

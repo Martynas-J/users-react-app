@@ -45,15 +45,15 @@ const CreateEditComment = ({ onCommentCreated, comment }) => {
     setEmail("")
   }
   return (
-    <form onSubmit={newCommentHandler}>
+    <form className="comment-form" onSubmit={newCommentHandler}>
       <div className="form-control">
         <label htmlFor="name">Name:</label>
-        <input type="name" id="name" name="name" value={name} onChange={nameHandler} />
+        <input type="text" id="name" name="name" value={name} onChange={nameHandler} />
       </div>
 
       <div className="form-control">
-        <label htmlFor="body">Body:</label>
-        <textarea id="body" name="body" rows="5" cols="30" value={body} onChange={bodyHandler}></textarea>
+        <label htmlFor="body">Comment:</label>
+        <textarea id="body" name="body" rows="5" cols="21" value={body} onChange={bodyHandler}></textarea>
       </div>
       <div className="form-control">
         <label htmlFor="email">Email:</label>

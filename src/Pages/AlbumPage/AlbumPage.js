@@ -23,10 +23,15 @@ const AlbumPage = () => {
   const albumUser = <div><Link to={`../UsersPage/${album.userId}`}>Author: {album.user.name}</Link></div>
   album.photos.map(element => images.push({original: element.url, thumbnail: element.thumbnailUrl, description: element.title}))
 
+const addPhotoHandler = () => {
+  console.log("veikia")
+}
+
   return (
     <div id="album">
       <div>
         {albumTitle}
+        <button onClick={addPhotoHandler}>Add Photo</button>
         {albumUser}
         <ReactImageGallery items={images} />
       </div>

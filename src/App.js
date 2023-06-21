@@ -8,6 +8,8 @@ import UserPage from "./Pages/UserPage/UserPage";
 import AlbumPage from "./Pages/AlbumPage/AlbumPage";
 import PostPage from "./Pages/PostPage/PostPage";
 import HomePage from "./Pages/HomePage/HomePage";
+import UserForm from "./Pages/UserForm/UserForm";
+import AlbumForm from "./Pages/AlbumForm/AlbumForm";
 
 
 function App() {
@@ -18,11 +20,15 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/UsersPage' element={<UsersPage />} />
         <Route path='/UsersPage/:id' element={<UserPage />} />
+        <Route path='/UserForm' element={<UserForm />} />
+        <Route path='/UserForm/:id' element={<UserForm />} />
         <Route path='/PostsPage' element={<PostsPage />} />
         <Route path='/PostsPage/:id' element={<PostsPage />} />
         <Route path='/PostPage/:id' element={<PostPage />} />
         <Route path='/AlbumsPage' element={<AlbumsPage />} />
         <Route path='/AlbumsPage/:id' element={<AlbumPage />} />
+        <Route path='/AlbumForm' element={<AlbumForm />} />
+        <Route path='/AlbumForm/:id' element={<AlbumForm />} />
         <Route path='/SearchPage/' element={<SearchPage />} />
         <Route path='/SearchPage//:category' element={<SearchPage />} />
         <Route path='/SearchPage/:text' element={<SearchPage />} />

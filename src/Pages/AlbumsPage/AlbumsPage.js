@@ -17,25 +17,33 @@ const AlbumsPage = () => {
   if (!albums) {
     return ""
   }
-
   allAlbums = albums.map((album, index) => {
-    const albumPicture = <Link to={`./${album.id}`}><img src={album.photos[0].thumbnailUrl} /></Link>
+    const albumPicture = album.photos.length > 0 && <Link to={`./${album.id}`}><img src={album.photos[0].thumbnailUrl} /></Link>
 
     const albumUser = <Link to={`../UsersPage/${album.userId}`}> Author: {album.user.name}</Link>
-    const albumPicturesNr = `Picture number: ${album.photos.length}`
-    const albumTitle = `${index} Album name: ${album.title}`
+    const albumPicturesNr = album.photos.length > 0 && `Picture number: ${album.photos.length}`
+    const albumTitle = <Link to={`./${album.id}`}>{index} Album name: {album.title}</Link>
     return (
       <div key={album.id}>
         <h3>{albumTitle}</h3>
         <div>{albumUser}</div>
         <div>{albumPicturesNr}</div>
         {albumPicture}
+        <button onClick={() => deleteHandler(album.id)}>Delete</button>
+        <Link to={`../AlbumForm/${album.id}`}><button >Edit</button></Link>
       </div>
     )
   })
-
+  const deleteHandler = (id) => {
+    axios.delete(`${API_URL}/albums/${id}`)
+    setAlbums(prevState => {
+      let newState = [...prevState]
+      return newState.filter(((albums) => albums.id !== id))
+    })
+  }
   return (
     <div id="albums-list">
+      <Link className="album-form-link" to="../AlbumForm">Create new album</Link>
       <div>{allAlbums}</div>
     </div>
   )
