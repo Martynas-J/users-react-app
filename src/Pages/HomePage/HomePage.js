@@ -36,10 +36,14 @@ const HomePage = () => {
         <div key={element.id} className="albums-content">
             <h2><Link to={`./AlbumsPage/${element.id}`}>Title: {firstLetterUpperCase(element.title)}</Link></h2>
             <div><Link to={`./UsersPage/${element.userId}`}>Author: {element.user.name}</Link></div>
+           {
+            element.photos.length > 0 ?
             <p>
-                {firstLetterUpperCase(element.photos[0].title)}
+                { firstLetterUpperCase(element.photos[0].title)}
                 <Link key={element.id} to={element.photos[0].url}><img src={element.photos[0].thumbnailUrl} /></Link>
-            </p>
+            </p> : ""
+           }
+            
         </div>
     ))
     const usersList = users.map(element => (
@@ -57,15 +61,15 @@ const HomePage = () => {
             <h1>API Project Data Introduction</h1>
             <div className="posts-wrap">
                 <h1>Last {postsNr} posts</h1>
-                {postsList}
+                {postsList.reverse()}
             </div>
             <div className="albums-wrap">
                 <h1>Last {albumsNr} albums</h1>
-                {albumsList}
+                {albumsList.reverse()}
             </div>
             <div className="users-wrap">
                 <h1>Last {usersNr} users</h1>
-                {usersList}
+                {usersList.reverse()}
             </div>
 
         </div>

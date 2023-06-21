@@ -7,24 +7,24 @@ import { Link } from "react-router-dom"
 
 const UsersPage = () => {
 
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState("")
 
   useEffect(() => {
     axios.get(`${API_URL}/users?_embed=posts`)
       .then(res => setUsers(res.data))
   }, [])
 
-  let usersList = ""
-
-  if (users) {
-    usersList = users.map(user => (
-      <li key={user.id}>
-        <Link to={`./${user.id}`} > {user.name} ({user.posts.length} posts) </Link>
-        <button onClick={() => deleteHandler(user.id)}>Delete</button>
-        <Link to={`../UserForm/${user.id}`}><button >Edit</button></Link>
-      </li>
-    ))
+  if (!users) {
+    return ""
   }
+  let usersList = users.map(user => (
+    <li key={user.id}>
+      <Link to={`./${user.id}`} > {user.name} ({user.posts.length} posts) </Link>
+      <button onClick={() => deleteHandler(user.id)}>Delete</button>
+      <Link to={`../UserForm/${user.id}`}><button >Edit</button></Link>
+    </li>
+  ))
+
   const deleteHandler = (id) => {
     axios.delete(`${API_URL}/users/${id}`)
     setUsers(prevState => {
