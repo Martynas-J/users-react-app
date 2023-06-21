@@ -356,7 +356,7 @@ a.on-this-page:hover{
     background-color: rgb(179, 179, 179); 
     padding: 20px;
 }
-.comment-form, .post-form, .user-form, .album-form{
+.comment-form, .post-form, .user-form, .album-form, .photo-form{
     box-shadow: 7px 7px 20px 1px rgba(0, 0, 0, 0.678);
     border-radius: 10px;
     padding: 15px;

@@ -9,6 +9,8 @@ const AlbumForm = () => {
   const [album, setAlbum] = useState('');
   const [title, setTitle] = useState('');
   const [users, setUsers] = useState([]);
+  const [buttonText, setButtonText] = useState("Create new album");
+
   const albumId = useParams().id
   const navigate = useNavigate();
 
@@ -21,7 +23,7 @@ const AlbumForm = () => {
 
   const titleHandler = event => setTitle(event.target.value);
 
-  const [buttonText, setButtonText] = useState("Create new album");
+
   const userHandler = event => setUser(event.target.value);
 
   useEffect(() => {
@@ -35,7 +37,6 @@ const AlbumForm = () => {
   useEffect(() => {
     if (album) {
       setButtonText("Save")
-      console.log(user)
       const { userId, title } = album
       setTitle(title)
       setUser(userId);
@@ -44,15 +45,15 @@ const AlbumForm = () => {
 
   const newAlbumHandler = (event) => {
     event.preventDefault();
-    const newUser = {
+    const newAlbum = {
       userId: Number(user),
       title
     }
     if (album) {
-      axios.put(`${API_URL}/albums/${albumId}`, newUser)
+      axios.put(`${API_URL}/albums/${albumId}`, newAlbum)
       navigate('../AlbumsPage');
     } else {
-      axios.post(`${API_URL}/albums?_embed=photos&_expand=user`, newUser)
+      axios.post(`${API_URL}/albums?_embed=photos&_expand=user`, newAlbum)
     }
     setTitle("")
     setUser("");
@@ -63,7 +64,7 @@ const AlbumForm = () => {
       <h1 className="album-data-form">Album Form</h1>
       <form className="album-form" onSubmit={newAlbumHandler}>
         <div className="form-control">
-          <label htmlFor="title">title:</label>
+          <label htmlFor="title">Title:</label>
           <input type="text" id="title" name="title" value={title} onChange={titleHandler} />
         </div>
         <div className="form-control">

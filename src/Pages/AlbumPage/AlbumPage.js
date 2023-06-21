@@ -1,18 +1,20 @@
 
 import React, { useEffect, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { API_URL } from "../../Components/Config/Config"
 import axios from "axios"
 import "react-image-gallery/styles/css/image-gallery.css"
 import ReactImageGallery from "react-image-gallery";
+import AddPhoto from "../../Components/AddPhoto/AddPhoto"
 
 
 const AlbumPage = () => {
 
   const [album, setAlbum] = useState("")
   const [photos, setPhotos] = useState("")
+  const [addPhoto, setAddPhoto] = useState(false)
+
   const id = useParams().id
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`${API_URL}/albums?id=${id}&_embed=photos&_expand=user`)
@@ -34,9 +36,19 @@ const AlbumPage = () => {
       <button onClick={() => deleteHandler(photo.id)}> Delete</button></>
   }))
 
-  const addPhotoHandler = () => {
-    console.log("veikia")
+  const addFormHandler = () => {
+    setAddPhoto(prevState => !prevState)
+
   }
+  const addPhotoHandler = (newPhoto) => {
+    setPhotos(prevState => {
+      let newState = [...prevState]
+      newState.unshift(newPhoto)
+      return newState
+    })
+    axios.post(`${API_URL}/photos`, newPhoto)
+  }
+
   const deleteHandler = (id) => {
     axios.delete(`${API_URL}/photos/${id}`)
     setPhotos(prevState => {
@@ -44,11 +56,13 @@ const AlbumPage = () => {
       return newState.filter(((photo) => photo.id !== id))
     })
   }
+
   return (
     <div id="album">
       <div>
         {albumTitle}
-        <button onClick={addPhotoHandler}>Add Photo</button>
+        {addPhoto ? <AddPhoto onAddPhoto={addPhotoHandler} /> : ""}
+        <button onClick={addFormHandler}>{addPhoto ? "Hide form" : "Photo input form"}</button>
         {albumUser}
         <ReactImageGallery items={images} />
       </div>

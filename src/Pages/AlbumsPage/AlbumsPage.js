@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 const AlbumsPage = () => {
 
   const [albums, setAlbums] = useState([])
+  const [errorMessage, setErrorMessage] = useState("")
   let allAlbums = ""
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const AlbumsPage = () => {
   })
   const deleteHandler = (id) => {
     axios.delete(`${API_URL}/albums/${id}`)
+    .catch(err => setErrorMessage(err.message))
     setAlbums(prevState => {
       let newState = [...prevState]
       return newState.filter(((albums) => albums.id !== id))
@@ -43,6 +45,7 @@ const AlbumsPage = () => {
   }
   return (
     <div id="albums-list">
+      {errorMessage}
       <Link className="album-form-link" to="../AlbumForm">Create new album</Link>
       <div>{allAlbums}</div>
     </div>
