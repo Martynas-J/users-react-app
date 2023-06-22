@@ -2,13 +2,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../Config/Config";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const CreateEditPost = ({onPostCreated, postToEdit}) => {
+const CreateEditPost = ({ onPostCreated, postToEdit }) => {
   const [users, setUsers] = useState([]);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [user, setUser] = useState('');
   const [buttonText, setButtonText] = useState("Create new comment");
+  let addText = ""
 
   useEffect(() => {
     axios.get(`${API_URL}/users`)
@@ -40,10 +43,12 @@ const CreateEditPost = ({onPostCreated, postToEdit}) => {
     };
     if (postToEdit) {
       setButtonText("Create new comment")
-      console.log(postToEdit)
       axios.patch(`${API_URL}/posts/${postToEdit.id}`, newPost)
-    }else {
-      axios.post(`${API_URL}/posts`, newPost)
+        .catch(res => toast.error(res.messages))
+    } else {
+      axios.post(`${API_URL}/pos`, newPost)
+        .then(() => toast.success("Post Created"))
+        .catch(res => toast.error(res.message))
     }
     onPostCreated(true)
     setTitle("")
@@ -70,6 +75,7 @@ const CreateEditPost = ({onPostCreated, postToEdit}) => {
       </div>
 
       <input type="submit" value={buttonText} />
+      <ToastContainer />
     </form>
   )
 }

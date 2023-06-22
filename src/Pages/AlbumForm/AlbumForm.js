@@ -51,7 +51,7 @@ const AlbumForm = () => {
     }
     if (album) {
       axios.put(`${API_URL}/albums/${albumId}`, newAlbum)
-      navigate('../AlbumsPage');
+      navigate('/AlbumsPage');
     } else {
       axios.post(`${API_URL}/albums?_embed=photos&_expand=user`, newAlbum)
     }
@@ -75,7 +75,7 @@ const AlbumForm = () => {
         </div>
         <input type="submit" value={buttonText} />
       </form>
-      <Link className="album-form-link" to="../AlbumsPage">Back to albums</Link>
+      <Link className="album-form-link" to="/AlbumsPage">Back to albums</Link>
     </div>
   )
 }

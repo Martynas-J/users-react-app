@@ -23,9 +23,9 @@ const PostPage = () => {
 
     const postTitle = <h2>{post.title}</h2>
     const postAuthor = <div>
-        <Link to={`../UsersPage/${post.userId}`}>Author: {post.user.name}</Link></div>
+        <Link to={`/UsersPage/${post.userId}`}>Author: {post.user.name}</Link></div>
     const postContent = <p>{firstLetterUpperCase(post.body)}</p>
-    const allUserPosts = <span><Link to={`../PostsPage/${post.userId}`}>Other posts by {post.user.name}</Link></span>
+    const allUserPosts = <span><Link to={`/PostsPage/${post.userId}`}>Other posts by {post.user.name}</Link></span>
     const commentsTitle = <h3>Comments:</h3>
     const allComments = post.comments.map(element => (
         <Fragment key={element.id}>

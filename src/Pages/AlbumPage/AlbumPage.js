@@ -6,6 +6,7 @@ import axios from "axios"
 import "react-image-gallery/styles/css/image-gallery.css"
 import ReactImageGallery from "react-image-gallery";
 import AddPhoto from "../../Components/AddPhoto/AddPhoto"
+import classes from "./AlbumPage.module.scss"
 
 
 const AlbumPage = () => {
@@ -29,7 +30,7 @@ const AlbumPage = () => {
   }
   let images = []
   const albumTitle = <h3>{album.title}</h3>
-  const albumUser = <div><Link to={`../UsersPage/${album.userId}`}>Author: {album.user.name}</Link></div>
+  const albumUser = <div><Link to={`/UsersPage/${album.userId}`}>Author: {album.user.name}</Link></div>
   photos.map(photo => images.push({
     original: photo.url, thumbnail: photo.thumbnailUrl,
     description: <>{photo.title}
@@ -56,13 +57,12 @@ const AlbumPage = () => {
       return newState.filter(((photo) => photo.id !== id))
     })
   }
-
   return (
     <div id="album">
       <div>
         {albumTitle}
         {addPhoto ? <AddPhoto onAddPhoto={addPhotoHandler} /> : ""}
-        <button onClick={addFormHandler}>{addPhoto ? "Hide form" : "Photo input form"}</button>
+        <button className={classes.addPhotoButton} onClick={addFormHandler}>{addPhoto ? "Hide form" : "Photo input form"}</button>
         {albumUser}
         <ReactImageGallery items={images} />
       </div>

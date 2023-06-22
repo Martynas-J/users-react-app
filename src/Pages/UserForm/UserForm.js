@@ -97,7 +97,7 @@ const UserForm = () => {
         }
         if (user) {
             axios.put(`${API_URL}/users/${userId}`, newUser)
-            navigate('../UsersPage');
+            navigate('/UsersPage');
         }else {
             axios.post(`${API_URL}/users`, newUser)
         }
@@ -188,7 +188,7 @@ const UserForm = () => {
                 </div>
                 <input type="submit" value={buttonText} />
             </form>
-            <Link className="user-form-link" to="../UsersPage">Back to users page</Link>
+            <Link className="user-form-link" to="/UsersPage">Back to users page</Link>
         </div>
     )
 }

@@ -27,15 +27,15 @@ const HomePage = () => {
     }
     const postsList = posts.map(element => (
         <div key={element.id} className="posts-content">
-            <h2><Link to={`./PostPage/${element.id}`}>Title: {firstLetterUpperCase(element.title)}</Link></h2>
-            <div><Link to={`./UsersPage/${element.userId}`}>Author: {element.user.name}</Link></div>
+            <h2><Link to={`/PostPage/${element.id}`}>Title: {firstLetterUpperCase(element.title)}</Link></h2>
+            <div><Link to={`/UsersPage/${element.userId}`}>Author: {element.user.name}</Link></div>
             <p>{firstLetterUpperCase(element.body)}</p>
         </div>
     ))
     const albumsList = albums.map(element => (
         <div key={element.id} className="albums-content">
-            <h2><Link to={`./AlbumsPage/${element.id}`}>Title: {firstLetterUpperCase(element.title)}</Link></h2>
-            <div><Link to={`./UsersPage/${element.userId}`}>Author: {element.user.name}</Link></div>
+            <h2><Link to={`/AlbumsPage/${element.id}`}>Title: {firstLetterUpperCase(element.title)}</Link></h2>
+            <div><Link to={`/UsersPage/${element.userId}`}>Author: {element.user.name}</Link></div>
            {
             element.photos.length > 0 ?
             <p>
@@ -52,7 +52,7 @@ const HomePage = () => {
             <p>
                 Nick: {element.username} is from {element.address.city} city. Has {element.posts.length} posts and {element.albums.length} albums
             </p>
-            <span><Link to={`./UsersPage/${element.id}`}> Other about {element.name}</Link></span>
+            <span><Link to={`/UsersPage/${element.id}`}> Other about {element.name}</Link></span>
         </div>
     ))
 

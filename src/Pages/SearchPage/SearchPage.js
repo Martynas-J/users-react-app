@@ -47,11 +47,11 @@ const SearchPage = () => {
         <ul>
           {item[1].map(element => {
             let searchResult = item[0] === "comments" || item[0] === "users" ? firstLetterUpperCase(element.name) : `Title: ${firstLetterUpperCase(element.title)}`
-            let link = `../${firstLetterUpperCase(item[0])}Page/${element.id}`
+            let link = `/${firstLetterUpperCase(item[0])}Page/${element.id}`
             if (item[0] === "photos") {
-              link = `../AlbumsPage/${element.id}`
+              link = `/AlbumsPage/${element.id}`
             } else if (item[0] === "comments") {
-              link = `../PostPage/${element.postId}`
+              link = `/PostPage/${element.postId}`
             }
             return <Link key={element.id} to={link} ><li >{searchResult}</li></Link>
           })}

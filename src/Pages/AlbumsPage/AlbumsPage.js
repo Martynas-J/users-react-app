@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { API_URL } from "../../Components/Config/Config"
 import { Link } from "react-router-dom"
+import classes from "./AlbumsPage.module.scss"
 
 
 const AlbumsPage = () => {
@@ -21,7 +22,7 @@ const AlbumsPage = () => {
   allAlbums = albums.map((album, index) => {
     const albumPicture = album.photos.length > 0 && <Link to={`./${album.id}`}><img src={album.photos[0].thumbnailUrl} /></Link>
 
-    const albumUser = <Link to={`../UsersPage/${album.userId}`}> Author: {album.user.name}</Link>
+    const albumUser = <Link to={`/UsersPage/${album.userId}`}> Author: {album.user.name}</Link>
     const albumPicturesNr = album.photos.length > 0 && `Picture number: ${album.photos.length}`
     const albumTitle = <Link to={`./${album.id}`}>{index} Album name: {album.title}</Link>
     return (
@@ -30,14 +31,17 @@ const AlbumsPage = () => {
         <div>{albumUser}</div>
         <div>{albumPicturesNr}</div>
         {albumPicture}
-        <button onClick={() => deleteHandler(album.id)}>Delete</button>
-        <Link to={`../AlbumForm/${album.id}`}><button >Edit</button></Link>
+        <div className={classes.albumsButton}>
+          <button onClick={() => deleteHandler(album.id)}>Delete</button>
+          <Link className="button" to={`/AlbumForm/${album.id}`}>Edit</Link>
+        </div>
+
       </div>
     )
   })
   const deleteHandler = (id) => {
     axios.delete(`${API_URL}/albums/${id}`)
-    .catch(err => setErrorMessage(err.message))
+      .catch(err => setErrorMessage(err.message))
     setAlbums(prevState => {
       let newState = [...prevState]
       return newState.filter(((albums) => albums.id !== id))
@@ -46,7 +50,7 @@ const AlbumsPage = () => {
   return (
     <div id="albums-list">
       {errorMessage}
-      <Link className="album-form-link" to="../AlbumForm">Create new album</Link>
+      <Link className="album-form-link" to="/AlbumForm">Create new album</Link>
       <div>{allAlbums}</div>
     </div>
   )

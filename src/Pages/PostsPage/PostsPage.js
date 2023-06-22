@@ -6,6 +6,7 @@ import { firstLetterUpperCase } from "../../Components/Functions/Functions"
 import Pagination from "rc-pagination"
 import '../../assets/index.css';
 import CreatePost from "../../Components/CreateEditPost/CreateEditPost"
+import { toast } from "react-toastify"
 
 
 
@@ -47,15 +48,17 @@ const PostsPage = () => {
   const deleteHandler = (id) => {
     setIsChanged(true)
     axios.delete(`${API_URL}/posts/${id}`)
+      .then(() => toast.success("Post Deleted"))
+      .catch(res => toast.error(res.message))
   }
   const editHandler = (id) => {
     const editPost = posts.find(((post) => post.id === id))
     setPostToEdit(editPost)
-}
+  }
 
   const allPosts = posts.map(element => {
-    const postTitle = <Link to={`../PostPage/${element.id}`}>Title: {firstLetterUpperCase(element.title)}</Link>
-    const postUser = <Link to={`../UsersPage/${element.userId}`}>Author: {element.user.name}</Link>
+    const postTitle = <Link to={`/PostPage/${element.id}`}>Title: {firstLetterUpperCase(element.title)}</Link>
+    const postUser = <Link to={`/UsersPage/${element.userId}`}>Author: {element.user.name}</Link>
     const postComments = <span>({element.comments.length} Comments)</span>
     return (
       <Fragment key={element.id}>
