@@ -48,7 +48,7 @@ const PostsPage = () => {
   const deleteHandler = (id) => {
     setIsChanged(true)
     axios.delete(`${API_URL}/posts/${id}`)
-      .then(() => toast.success("Post Deleted"))
+      .then(() => toast.info("Post Deleted"))
       .catch(res => toast.error(res.message))
   }
   const editHandler = (id) => {

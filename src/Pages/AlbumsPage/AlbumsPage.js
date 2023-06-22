@@ -3,12 +3,12 @@ import { useEffect, useState } from "react"
 import { API_URL } from "../../Components/Config/Config"
 import { Link } from "react-router-dom"
 import classes from "./AlbumsPage.module.scss"
+import { toast } from "react-toastify"
 
 
 const AlbumsPage = () => {
 
   const [albums, setAlbums] = useState([])
-  const [errorMessage, setErrorMessage] = useState("")
   let allAlbums = ""
 
   useEffect(() => {
@@ -41,19 +41,21 @@ const AlbumsPage = () => {
   })
   const deleteHandler = (id) => {
     axios.delete(`${API_URL}/albums/${id}`)
-      .catch(err => setErrorMessage(err.message))
-    setAlbums(prevState => {
-      let newState = [...prevState]
-      return newState.filter(((albums) => albums.id !== id))
-    })
+      .then(() => {
+        toast.info("Album Deleted")
+        setAlbums(prevState => {
+          let newState = [...prevState]
+          return newState.filter(((albums) => albums.id !== id))
+        })
+      })
+      .catch(res => toast.error(res.message))
   }
   return (
     <div id="albums-list">
-      {errorMessage}
       <Link className="album-form-link" to="/AlbumForm">Create new album</Link>
       <div>{allAlbums}</div>
     </div>
   )
 }
 
-export default AlbumsPage
+export default AlbumsPage 

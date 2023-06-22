@@ -2,28 +2,30 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { API_URL } from "../Config/Config";
 import { useParams } from "react-router-dom";
-
+import { toast } from "react-toastify";
 
 const CreateEditComment = ({ onCommentCreated, comment }) => {
-
-  const id = useParams().id
-  const [name, setName] = useState('');
-  const [body, setBody] = useState('');
-  const [email, setEmail] = useState('');
+  const id = useParams().id;
+  const [name, setName] = useState("");
+  const [body, setBody] = useState("");
+  const [email, setEmail] = useState("");
   const [buttonText, setButtonText] = useState("Create new comment");
+  const [localComment, setLocalComment] = useState(comment);
 
-  const nameHandler = event => setName(event.target.value);
-  const bodyHandler = event => setBody(event.target.value);
-  const emailHandler = event => setEmail(event.target.value);
   useEffect(() => {
     if (comment) {
-      setButtonText("Save")
-      const { name, body, email } = comment
-      setName(name)
-      setBody(body)
-      setEmail(email)
+      setButtonText("Save");
+      const { name, body, email } = comment;
+      setName(name);
+      setBody(body);
+      setEmail(email);
+      setLocalComment(comment);
     }
-  }, [comment])
+  }, [comment]);
+
+  const nameHandler = (event) => setName(event.target.value);
+  const bodyHandler = (event) => setBody(event.target.value);
+  const emailHandler = (event) => setEmail(event.target.value);
 
   const newCommentHandler = (event) => {
     event.preventDefault();
@@ -31,18 +33,29 @@ const CreateEditComment = ({ onCommentCreated, comment }) => {
       name: name,
       body: body,
       email: email,
-      postId: Number(id)
+      postId: Number(id),
     };
-    if (comment) {
-      axios.patch(`${API_URL}/comments/${comment.id}`, newComment)
-      setButtonText("Create new comment")
+    if (localComment) {
+      axios
+        .patch(`${API_URL}/comments/${localComment.id}`, newComment)
+        .then(() => {
+          toast.success("Comment Edited");
+          setButtonText("Create new comment");
+          setLocalComment(null);
+        })
+        .catch((res) => toast.error(res.message));
     } else {
-      axios.post(`${API_URL}/comments`, newComment)
+      axios
+        .post(`${API_URL}/comments`, newComment)
+        .then(() => {
+          toast.success("Comment Created");
+        })
+        .catch((res) => toast.error(res.message));
     }
-    onCommentCreated(true)
-    setName("")
-    setBody("")
-    setEmail("")
+    onCommentCreated(true);
+    setName("");
+    setBody("");
+    setEmail("");
   }
   return (
     <form className="comment-form" onSubmit={newCommentHandler}>

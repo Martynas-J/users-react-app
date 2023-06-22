@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { API_URL } from "../../Components/Config/Config";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const AlbumForm = () => {
 
@@ -51,12 +52,21 @@ const AlbumForm = () => {
     }
     if (album) {
       axios.put(`${API_URL}/albums/${albumId}`, newAlbum)
-      navigate('/AlbumsPage');
+        .then(() => {
+          toast.success("Album Edited")
+          navigate('/AlbumsPage');
+        })
+        .catch(res => toast.error(res.message))
+
     } else {
       axios.post(`${API_URL}/albums?_embed=photos&_expand=user`, newAlbum)
+        .then(() => {
+          toast.info("Album Created")
+          setTitle("")
+          setUser(users[0].id);
+        })
+        .catch(res => toast.error(res.message))
     }
-    setTitle("")
-    setUser("");
   }
 
   return (

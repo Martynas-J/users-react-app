@@ -4,6 +4,7 @@ import { API_URL } from "../../Components/Config/Config"
 import axios from "axios"
 import { firstLetterUpperCase } from "../../Components/Functions/Functions"
 import CreateComment from "../../Components/CreateEditComment/CreateEditComment"
+import { toast } from "react-toastify"
 
 const PostPage = () => {
     const [post, setPost] = useState([])
@@ -35,7 +36,7 @@ const PostPage = () => {
                 {`Email: ${element.email}`}
                 <button onClick={() => deleteHandler(element.id)}>Delete</button>
                 <button onClick={() => editHandler(element.id)}>Edit</button>
-                </span>
+            </span>
 
         </Fragment>
     ))
@@ -44,7 +45,12 @@ const PostPage = () => {
     }
     const deleteHandler = (id) => {
         axios.delete(`${API_URL}/comments/${id}`)
-        setIsChanged(true)
+            .then(() => {
+                toast.info("Comment Deleted")
+                setIsChanged(true)
+            })
+            .catch(res => toast.error(res.message))
+
     }
     const editHandler = (id) => {
         const editComment = post.comments.find(((comment) => comment.id === id))
@@ -59,7 +65,7 @@ const PostPage = () => {
                 {allUserPosts}
                 {commentsTitle}
                 {allComments}
-                <CreateComment comment ={comment}  onCommentCreated={CommentCreatedHandler} />
+                <CreateComment comment={comment} onCommentCreated={CommentCreatedHandler} />
             </div>
         </div>
     )

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../../Components/Config/Config";
 import axios from "axios";
-import { Link, useNavigate, useParams} from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 const UserForm = () => {
@@ -97,24 +98,30 @@ const UserForm = () => {
         }
         if (user) {
             axios.put(`${API_URL}/users/${userId}`, newUser)
-            navigate('/UsersPage');
-        }else {
+                .then(() => {
+                    toast.success("User Edited")
+                    navigate('/UsersPage')
+                })
+                .catch(res => toast.error(res.message))
+        } else {
             axios.post(`${API_URL}/users`, newUser)
+                .then(() => toast.info("User Created"))
+                .catch(res => toast.error(res.message))
+            setName("")
+            setUsername('');
+            setEmail('');
+            setStreet('');
+            setSuite('');
+            setCity('');
+            setZipcode('');
+            setLat('');
+            setLng('');
+            setPhone('');
+            setWebsite('');
+            setCompanyName('');
+            setCatchPhrase('');
+            setBs('');
         }
-        setName("")
-        setUsername('');
-        setEmail('');
-        setStreet('');
-        setSuite('');
-        setCity('');
-        setZipcode('');
-        setLat('');
-        setLng('');
-        setPhone('');
-        setWebsite('');
-        setCompanyName('');
-        setCatchPhrase('');
-        setBs('');
     }
 
     return (

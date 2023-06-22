@@ -7,6 +7,7 @@ import "react-image-gallery/styles/css/image-gallery.css"
 import ReactImageGallery from "react-image-gallery";
 import AddPhoto from "../../Components/AddPhoto/AddPhoto"
 import classes from "./AlbumPage.module.scss"
+import { toast } from "react-toastify"
 
 
 const AlbumPage = () => {
@@ -42,20 +43,29 @@ const AlbumPage = () => {
 
   }
   const addPhotoHandler = (newPhoto) => {
-    setPhotos(prevState => {
-      let newState = [...prevState]
-      newState.unshift(newPhoto)
-      return newState
-    })
+
     axios.post(`${API_URL}/photos`, newPhoto)
+      .then(() => {
+        toast.success("Photo Added")
+        setPhotos(prevState => {
+          let newState = [...prevState]
+          newState.unshift(newPhoto)
+          return newState
+        })
+      })
+      .catch(res => toast.error(res.message))
   }
 
   const deleteHandler = (id) => {
     axios.delete(`${API_URL}/photos/${id}`)
-    setPhotos(prevState => {
-      let newState = [...prevState]
-      return newState.filter(((photo) => photo.id !== id))
-    })
+      .then(() => {
+        toast.info("Photo Deleted")
+        setPhotos(prevState => {
+          let newState = [...prevState]
+          return newState.filter(((photo) => photo.id !== id))
+        })
+      })
+      .catch(res => toast.error(res.message))
   }
   return (
     <div id="album">

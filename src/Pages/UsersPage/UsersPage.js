@@ -5,6 +5,7 @@ import "./UsersPage.scss"
 
 import { Link } from "react-router-dom"
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 const UsersPage = () => {
 
@@ -56,10 +57,15 @@ const UsersPage = () => {
 
   const deleteHandler = (id) => {
     axios.delete(`${API_URL}/users/${id}`)
-    setUsers(prevState => {
-      let newState = [...prevState]
-      return newState.filter(((user) => user.id !== id))
-    })
+      .then(() => {
+        toast.info("User Deleted")
+        setUsers(prevState => {
+          let newState = [...prevState]
+          return newState.filter(((user) => user.id !== id))
+        })
+      })
+      .catch(res => toast.error(res.message))
+
   }
   return (
     <div id="users-list">
