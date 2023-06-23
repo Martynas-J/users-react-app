@@ -772,29 +772,6 @@
         "bs": "dsfg"
       },
       "id": 10
-    },
-    {
-      "name": "asd",
-      "username": "sad",
-      "email": "gr@fdsgfdsg",
-      "address": {
-        "street": "dfg",
-        "suite": "dfg",
-        "city": "sfdgsdf",
-        "zipcode": "hdf",
-        "geo": {
-          "lat": "828",
-          "lng": "8584"
-        }
-      },
-      "phone": "reg",
-      "website": "ff",
-      "company": {
-        "name": "sf",
-        "catchPhrase": "dfg",
-        "bs": "sfesf"
-      },
-      "id": 11
     }
   ],
   "comments": [
@@ -3527,13 +3504,6 @@
       "email": "dfgdfg@fdsg",
       "postId": 11,
       "id": 501
-    },
-    {
-      "name": "wer",
-      "body": "werfewfw",
-      "email": "reref@FEdf",
-      "postId": 11,
-      "id": 502
     },
     {
       "name": "sdf",
