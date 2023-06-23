@@ -69,7 +69,7 @@ const UsersPage = () => {
   }
   return (
     <div id="users-list">
-      <Link className="user-form-link" to="/UserForm">Create new user</Link>
+      <Link className="user-form-link" button to="/UserForm">Create new user</Link>
       <ul>{usersList}</ul>
     </div>
   )

@@ -11,6 +11,9 @@ const CreateEditComment = ({ onCommentCreated, comment }) => {
   const [email, setEmail] = useState("");
   const [buttonText, setButtonText] = useState("Create new comment");
   const [localComment, setLocalComment] = useState(comment);
+  const [nameError, setNameError] = useState(false);
+  const [bodyError, setBodyError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
   useEffect(() => {
     if (comment) {
@@ -23,9 +26,23 @@ const CreateEditComment = ({ onCommentCreated, comment }) => {
     }
   }, [comment]);
 
-  const nameHandler = (event) => setName(event.target.value);
-  const bodyHandler = (event) => setBody(event.target.value);
-  const emailHandler = (event) => setEmail(event.target.value);
+  const nameHandler = (event) => {
+    const value = event.target.value;
+    setName(value);
+    setNameError(value === "" || value[0] === " ");
+  };
+
+  const bodyHandler = (event) => {
+    const value = event.target.value;
+    setBody(value);
+    setBodyError(value === "" || value[0] === " ");
+  };
+
+  const emailHandler = (event) => {
+    const value = event.target.value;
+    setEmail(value);
+    setEmailError(value === "" || value[0] === " ");
+  };
 
   const newCommentHandler = (event) => {
     event.preventDefault();
@@ -35,6 +52,23 @@ const CreateEditComment = ({ onCommentCreated, comment }) => {
       email: email,
       postId: Number(id),
     };
+    if (name === "" || name[0] === " ") {
+      setNameError(true);
+      toast.error("Name is Empty or incorrect", { autoClose: 5000 })
+      return "";
+    }
+
+    if (body === "" || body[0] === " ") {
+      setBodyError(true);
+      toast.error("Body is Empty or incorrect", { autoClose: 5000 })
+      return "";
+    }
+
+    if (email === "" || email[0] === " ") {
+      setEmailError(true);
+      toast.error("Email is Empty or incorrect", { autoClose: 5000 })
+      return "";
+    }
     if (localComment) {
       axios
         .patch(`${API_URL}/comments/${localComment.id}`, newComment)
@@ -57,20 +91,21 @@ const CreateEditComment = ({ onCommentCreated, comment }) => {
     setBody("");
     setEmail("");
   }
+
   return (
     <form className="comment-form" onSubmit={newCommentHandler}>
       <div className="form-control">
-        <label htmlFor="name">Name:</label>
-        <input type="text" id="name" name="name" value={name} onChange={nameHandler} />
+        <label className={`${nameError ? "text-err" : ""}`} htmlFor="name">Name:</label>
+        <input className={`${nameError ? "input-err" : ""}`} type="text" id="name" name="name" value={name} onChange={nameHandler} />
       </div>
 
       <div className="form-control">
-        <label htmlFor="body">Comment:</label>
-        <textarea id="body" name="body" rows="5" cols="21" value={body} onChange={bodyHandler}></textarea>
+        <label className={`${bodyError ? "text-err" : ""}`} htmlFor="body">Comment:</label>
+        <textarea className={`${bodyError ? "input-err" : ""}`} id="body" name="body" rows="5" cols="21" value={body} onChange={bodyHandler}></textarea>
       </div>
       <div className="form-control">
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" value={email} onChange={emailHandler} />
+        <label className={`${emailError ? "text-err" : ""}`} htmlFor="email">Email:</label>
+        <input className={`${emailError ? "input-err" : ""}`} type="email" id="email" name="email" value={email} onChange={emailHandler} />
       </div>
       <input type="submit" value={buttonText} />
     </form>

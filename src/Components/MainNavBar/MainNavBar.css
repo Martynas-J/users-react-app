@@ -6,14 +6,12 @@
   border-radius: 20px;
   transition-property: color, box-shadow;
   transition-duration: 0.5s;
-
 }
 .navigation-link.active{
   color:blue;
   box-shadow: inset 0px 0px 10px 10px rgba(0, 0, 0, 0.466);
 }
 .navigation-link:hover{
-  color:brown;
   box-shadow: inset 0px 0px 10px 10px rgba(0, 0, 0, 0.466);
 }
 .nav-list{

@@ -15,6 +15,7 @@ const AlbumPage = () => {
   const [album, setAlbum] = useState("")
   const [photos, setPhotos] = useState("")
   const [addPhoto, setAddPhoto] = useState(false)
+  const [titleError, setTitleError] = useState(false);
 
   const id = useParams().id
 
@@ -43,10 +44,17 @@ const AlbumPage = () => {
 
   }
   const addPhotoHandler = (newPhoto) => {
-
+    if (newPhoto.title === "" || newPhoto.title[0] === " ") {
+      return "title";
+    }
+    if (newPhoto.url === "" || newPhoto.url[0] === " ") {
+      return "url";
+    }
+    if (newPhoto.thumbnailUrl === "" || newPhoto.thumbnailUrl[0] === " ") {
+      return "thumbnailUrl";
+    }
     axios.post(`${API_URL}/photos`, newPhoto)
       .then(() => {
-        toast.success("Photo Added")
         setPhotos(prevState => {
           let newState = [...prevState]
           newState.unshift(newPhoto)
@@ -54,6 +62,7 @@ const AlbumPage = () => {
         })
       })
       .catch(res => toast.error(res.message))
+      return true
   }
 
   const deleteHandler = (id) => {

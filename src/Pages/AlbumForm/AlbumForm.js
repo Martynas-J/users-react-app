@@ -11,9 +11,12 @@ const AlbumForm = () => {
   const [title, setTitle] = useState('');
   const [users, setUsers] = useState([]);
   const [buttonText, setButtonText] = useState("Create new album");
+  const [inputTitleErr, setInputTitleErr] = useState(false);
 
   const albumId = useParams().id
   const navigate = useNavigate();
+  let inputClass = ""
+  let inputTextClass = ""
 
   useEffect(() => {
     if (albumId) {
@@ -22,8 +25,11 @@ const AlbumForm = () => {
     }
   }, [albumId])
 
-  const titleHandler = event => setTitle(event.target.value);
-
+  const titleHandler = event => {
+    const value = event.target.value;
+    setTitle(value);
+    setInputTitleErr(value === "" || value[0] === " ");
+  };
 
   const userHandler = event => setUser(event.target.value);
 
@@ -44,12 +50,18 @@ const AlbumForm = () => {
     }
   }, [user])
 
-  const newAlbumHandler = (event) => {
+  const AlbumHandler = (event) => {
     event.preventDefault();
     const newAlbum = {
       userId: Number(user),
       title
     }
+    if (title[0] === " " || title === "") {
+      setInputTitleErr(true)
+      toast.error("Title is Empty or incorrect", { autoClose: 5000 })
+      return ""
+    }
+
     if (album) {
       axios.put(`${API_URL}/albums/${albumId}`, newAlbum)
         .then(() => {
@@ -69,13 +81,18 @@ const AlbumForm = () => {
     }
   }
 
+  if (inputTitleErr) {
+    inputClass = "input-err"
+    inputTextClass = "text-err"
+  }
+
   return (
     <div className="album-form-wrapper">
       <h1 className="album-data-form">Album Form</h1>
-      <form className="album-form" onSubmit={newAlbumHandler}>
+      <form className="album-form" onSubmit={AlbumHandler}>
         <div className="form-control">
-          <label htmlFor="title">Title:</label>
-          <input type="text" id="title" name="title" value={title} onChange={titleHandler} />
+          <label className={inputTextClass} htmlFor="title">Title:</label>
+          <input className={inputClass} type="text" id="title" name="title" value={title} onChange={titleHandler} />
         </div>
         <div className="form-control">
           <label htmlFor="user">User:</label>

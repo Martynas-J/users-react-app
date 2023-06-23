@@ -34,14 +34,21 @@ nav form {
     display: flex;
     justify-content:space-between;
     align-items: center;
+    gap: 10px;
 }
 nav form input, nav form button, .category-select{
-    font-size: 20px;
-    height: 30px;
-    max-width: 150px;
-    border-radius: 5px;
-    border: 3px solid black;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: black;
+    border: 2px solid rgba(0, 0, 0, 0.589);
+    border-radius: 20px;
+    transition-property: color, box-shadow;
+    transition-duration: 0.5s;
 }
+nav form button:hover{
+    box-shadow: inset 0px 0px 10px 10px rgba(0, 0, 0, 0.466);
+    cursor: pointer;
+  }
 nav ul li a:hover{
     color: white;
     background-color: black;
@@ -90,6 +97,8 @@ color: blue;
 }
 #users-list{
     padding-left: 30px;
+    margin-top: 30px;
+    padding-top: 10px;
 }
 #users-list ul{
     list-style: none;
@@ -139,6 +148,14 @@ color: blue;
 }
 #post a:hover{
     color: rgb(38, 10, 167);
+}
+#albums-list{
+    margin: 30px;
+    img{
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+    }
 }
 #albums-list>div{
     display: grid;
@@ -259,6 +276,10 @@ color: blue;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 20px;
     gap: 20px;
+    img{
+        width: 500px;
+       
+    }
 }
 #home>h1{
     grid-column: span 3;
@@ -367,6 +388,11 @@ a.on-this-page:hover{
     display: flex;
     justify-content: space-between;
 }
+.user-form-link, .album-form-link{
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: 0 0 10px black;
+}
 .user-form-link:hover, .album-form-link:hover{
     color: blue;
 }
@@ -377,23 +403,25 @@ a.on-this-page:hover{
 .user-data-form, .album-data-form{
     text-align: center;
 }
-body #root a.button{
-    appearance: auto;
-    padding: 1px 6px;
-    text-rendering: auto;
-    color: buttontext;
-    text-align: center;
-    background-color: buttonface;
-    margin: 0em;
-    border-width: 1px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial;
-    border-radius: 3px;
+
+button, body #root a.button{
+    padding: 3px 7px;
     font-size: 14px;
+    text-decoration: none;
+    color: black;
+    border: 2px solid rgba(0, 0, 0, 0.589);
+    border-radius: 20px;
+    transition-property: color, box-shadow;
+    transition-duration: 0.5s; 
     cursor: pointer;
-    line-height: normal;
     &:hover{
-        color: red;
+        box-shadow: inset 0px 0px 10px 10px rgba(0, 0, 0, 0.466); 
     }
+}
+.input-err{
+    background-color: rgb(221, 144, 144);
+    border-color: red;
+}
+.text-err{
+    color: red;  
 }

@@ -11,6 +11,13 @@ const CreateEditPost = ({ onPostCreated, postToEdit }) => {
   const [user, setUser] = useState("");
   const [buttonText, setButtonText] = useState("Create new comment");
   const [localPostToEdit, setLocalPostToEdit] = useState(postToEdit);
+  const [inputTitleErr, setInputTitleErr] = useState(false);
+  const [inputBodyErr, setInputBodyErr] = useState(false);
+
+  let inputTitleClass = ""
+  let titleTextClass = ""
+  let inputBodyClass = ""
+  let bodyTextClass = ""
 
   useEffect(() => {
     axios.get(`${API_URL}/users`).then((res) => {
@@ -30,8 +37,16 @@ const CreateEditPost = ({ onPostCreated, postToEdit }) => {
     }
   }, [postToEdit]);
 
-  const titleHandler = (event) => setTitle(event.target.value);
-  const bodyHandler = (event) => setBody(event.target.value);
+  const titleHandler = (event) => {
+    const value = event.target.value;
+    setTitle(value);
+    setInputTitleErr(value === "" || value[0] === " ");
+  };
+  const bodyHandler = (event) => {
+    const value = event.target.value;
+    setBody(value);
+    setInputBodyErr(value === "" || value[0] === " ");
+  };
   const userHandler = (event) => setUser(event.target.value);
 
   const newPostHandler = (event) => {
@@ -41,6 +56,18 @@ const CreateEditPost = ({ onPostCreated, postToEdit }) => {
       body,
       userId: Number(user),
     };
+
+    if (title[0] === " " || title === "") {
+      setInputTitleErr(true)
+      toast.error("Title is Empty or incorrect", { autoClose: 5000 })
+      return ""
+    }
+    if (body[0] === " " || body === "") {
+      setInputBodyErr(true)
+      toast.error("Body is Empty or incorrect", { autoClose: 5000 })
+      return ""
+    }
+
     if (localPostToEdit) {
       setButtonText("Create new comment");
       axios
@@ -60,17 +87,24 @@ const CreateEditPost = ({ onPostCreated, postToEdit }) => {
     setTitle("");
     setBody("");
   }
-
+  if (inputTitleErr) {
+    titleTextClass = "text-err"
+    inputTitleClass = "input-err"
+  }
+  if (inputBodyErr) {
+    bodyTextClass = "text-err"
+    inputBodyClass = "input-err"
+  }
   return (
     <form className="post-form" onSubmit={newPostHandler}>
       <div className="form-control">
-        <label htmlFor="title">Title:</label>
-        <input type="text" id="title" name="title" value={title} onChange={titleHandler} />
+        <label className={titleTextClass} htmlFor="title">Title:</label>
+        <input className={inputTitleClass} type="text" id="title" name="title" value={title} onChange={titleHandler} />
       </div>
 
       <div className="form-control">
-        <label htmlFor="body">Body:</label>
-        <textarea id="body" name="body" rows="5" cols="21" value={body} onChange={bodyHandler}></textarea>
+        <label className={bodyTextClass} htmlFor="body">Body:</label>
+        <textarea className={inputBodyClass} id="body" name="body" rows="5" cols="21" value={body} onChange={bodyHandler}></textarea>
       </div>
 
       <div className="form-control">
@@ -81,7 +115,7 @@ const CreateEditPost = ({ onPostCreated, postToEdit }) => {
       </div>
 
       <input type="submit" value={buttonText} />
-      
+
     </form>
   )
 }
