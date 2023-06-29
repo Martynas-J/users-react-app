@@ -41,7 +41,6 @@ const AlbumPage = () => {
 
   const addFormHandler = () => {
     setAddPhoto(prevState => !prevState)
-
   }
   const addPhotoHandler = (newPhoto) => {
     if (newPhoto.title === "" || newPhoto.title[0] === " ") {
